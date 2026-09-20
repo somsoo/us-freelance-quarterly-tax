@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://us-freelance-quarterly-tax.enjoy-onepage.com/sitemap.xml

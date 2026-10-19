@@ -1,28 +1,596 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quarterly Tax Calculator 2026 - Under maintenance</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="site-status" content="maintenance">
-<meta name="description" content="This tool is temporarily offline while it is rebuilt.">
+<title>Freelance Quarterly Tax Calculator</title>
+<meta name="description" content="Calculate 1099 quarterly estimated taxes, SE tax, and IRS 1040-ES payment due.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://us-freelance-quarterly-tax.enjoy-onepage.com/">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Freelance Quarterly Tax Calculator">
+<meta property="og:title" content="Freelance Quarterly Tax Calculator">
+<meta property="og:description" content="Calculate 1099 quarterly estimated taxes, SE tax, and IRS 1040-ES payment due.">
+<meta property="og:url" content="https://us-freelance-quarterly-tax.enjoy-onepage.com/">
+<meta property="og:image" content="https://us-freelance-quarterly-tax.enjoy-onepage.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Freelance Quarterly Tax Calculator">
+<meta name="twitter:description" content="Calculate 1099 quarterly estimated taxes, SE tax, and IRS 1040-ES payment due.">
+<meta name="twitter:image" content="https://us-freelance-quarterly-tax.enjoy-onepage.com/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="Quarterly Tax RSS" href="https://us-freelance-quarterly-tax.enjoy-onepage.com/rss.xml">
+<link rel="sitemap" type="application/xml" href="https://us-freelance-quarterly-tax.enjoy-onepage.com/sitemap.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://us-freelance-quarterly-tax.enjoy-onepage.com/#webapp",
+      "name": "Freelance Quarterly Tax Calculator",
+      "url": "https://us-freelance-quarterly-tax.enjoy-onepage.com/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "description": "Interactive tax estimator calculating 1099 freelance self-employment tax, federal income tax, and IRS Form 1040-ES quarterly estimated payments.",
+      "image": "https://us-freelance-quarterly-tax.enjoy-onepage.com/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://us-freelance-quarterly-tax.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is required to pay quarterly estimated taxes to the IRS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Freelancers, independent contractors, gig workers, and sole proprietors who expect to owe at least $1,000 in federal taxes after withholding must make quarterly estimated payments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the self-employment tax rate and how is it calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The self-employment tax rate is 15.3%, consisting of 12.4% for Social Security (up to the annual wage cap) and 2.9% for Medicare, calculated on 92.35% of net business profit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When are the quarterly 1040-ES tax payments due each year?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IRS estimated tax deadlines are April 15 for Q1, June 15 for Q2, September 15 for Q3, and January 15 of the following year for Q4."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6946654760086847" crossorigin="anonymous"></script>
 <style>
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; }
-  main { max-width: 560px; margin: 12vh auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; }
-  h1 { font-size: 1.4rem; margin: 0 0 12px; }
-  p { line-height: 1.6; color: #334155; }
-  a { color: #1d4ed8; font-weight: 600; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: #92400e; background: #fef3c7; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+  :root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 0 16px;
+  }
+  .container { max-width: 1040px; margin: 0 auto; padding: 24px 0 48px; }
+  header { text-align: center; margin-bottom: 24px; }
+  header h1 { font-size: 1.85rem; font-weight: 800; color: #1e293b; margin-bottom: 6px; }
+  header p { font-size: 0.95rem; color: var(--text-muted); }
+
+  .manual-ad-box {
+    margin: 16px auto;
+    text-align: center;
+    background: transparent;
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  @media (min-width: 768px) {
+    .grid2 { grid-template-columns: 1fr 1fr; }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .card h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-group { margin-bottom: 14px; }
+  .form-label { display: block; font-size: 0.82rem; font-weight: 600; color: #334155; margin-bottom: 4px; }
+  .form-input, .form-select {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 0.9rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+  }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+  }
+
+  .summary-banner {
+    background: #eef2ff;
+    border: 2px solid #c7d2fe;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .summary-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: #4338ca; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .summary-value { font-size: 2.1rem; font-weight: 800; color: #312e81; font-family: ui-monospace, SFMono-Regular, monospace; }
+  .summary-sub { font-size: 0.8rem; color: #4f46e5; font-weight: 600; margin-top: 4px; }
+
+  .quarterly-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .quarter-box {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .quarter-box .q-title { font-size: 0.75rem; font-weight: 700; color: #64748b; }
+  .quarter-box .q-date { font-size: 0.72rem; color: #94a3b8; margin-bottom: 2px; }
+  .quarter-box .q-amt { font-size: 1rem; font-weight: 800; color: #1e293b; }
+
+  .breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+  .breakdown-table tr { border-bottom: 1px solid #f1f5f9; }
+  .breakdown-table tr:last-child { border-bottom: none; }
+  .breakdown-table td { padding: 8px 4px; }
+  .breakdown-table .k { color: var(--text-muted); font-weight: 500; }
+  .breakdown-table .v { text-align: right; font-weight: 700; color: #1e293b; }
+
+  .info-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .info-section h2 { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .how-step {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .how-step .step-num {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    border-radius: 50%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .how-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: #1e293b; }
+  .how-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+
+  .faq-list { margin-top: 14px; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item h3 { font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .faq-item p { font-size: 0.85rem; color: #475569; line-height: 1.5; }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: .85rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+    z-index: 9999;
+  }
+  .toast.show { opacity: 1; }
+
+  footer {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+  footer a { color: var(--text-muted); text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: var(--text-main); text-decoration: underline; }
 </style>
 </head>
 <body>
-<main>
-  <span class="tag">Under maintenance</span>
-  <h1>Quarterly Tax Calculator 2026</h1>
-  <p>This tool is temporarily offline. We found that the previous version did not work the way it was described, so we took it down while we rebuild it properly.</p>
-  <p>Please check back later.</p>
-  <p><a href="https://enjoy-onepage.com/">Browse our other free tools</a></p>
-</main>
+<div class="container">
+  <header>
+    <h1>Freelance Quarterly Tax Calculator</h1>
+    <p>Estimate 1099 self-employment tax, federal income tax, and quarterly IRS 1040-ES payments.</p>
+  </header>
+
+  <!-- ADSENSE START: top -->
+  <div class="manual-ad-box ad-top-banner" style="width: 100%; max-width: 960px; min-height: 100px; margin: 0 auto 16px; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 100px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="3824727725"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: top -->
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Income &amp; Deductions</h2>
+
+      <div class="form-group">
+        <label class="form-label" for="grossIncome">Estimated Annual 1099 Gross Revenue ($)</label>
+        <input type="number" id="grossIncome" class="form-input" value="95000" min="0" step="1000">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="expenses">Annual Deductible Business Expenses ($)</label>
+        <input type="number" id="expenses" class="form-input" value="15000" min="0" step="500">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="filingStatus">Filing Status</label>
+        <select id="filingStatus" class="form-select">
+          <option value="single" selected>Single Filer</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="hoh">Head of Household</option>
+          <option value="mfs">Married Filing Separately</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="otherIncome">Other W-2 / Ordinary Income ($)</label>
+        <input type="number" id="otherIncome" class="form-input" value="0" min="0" step="1000">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="stateRate">State Income Tax Rate (%)</label>
+        <select id="stateRate" class="form-select">
+          <option value="0">0% (TX, FL, WA, NV, WY, SD, TN, AK)</option>
+          <option value="3">3% (Low State Tax)</option>
+          <option value="5" selected>5% (Moderate State Tax)</option>
+          <option value="8">8% (High State Tax - CA, NY, NJ)</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>IRS 1040-ES Quarterly Estimate</h2>
+
+      <div class="summary-banner">
+        <div class="summary-title">Each Quarterly Payment Due</div>
+        <div class="summary-value" id="valQuarterlyDue">$4,625</div>
+        <div class="summary-sub" id="valAnnualTotal">Total Annual Tax: $18,500</div>
+      </div>
+
+      <div class="quarterly-grid">
+        <div class="quarter-box">
+          <div class="q-title">Q1 Payment</div>
+          <div class="q-date">Due: Apr 15</div>
+          <div class="q-amt" id="q1Amt">$4,625</div>
+        </div>
+        <div class="quarter-box">
+          <div class="q-title">Q2 Payment</div>
+          <div class="q-date">Due: Jun 15</div>
+          <div class="q-amt" id="q2Amt">$4,625</div>
+        </div>
+        <div class="quarter-box">
+          <div class="q-title">Q3 Payment</div>
+          <div class="q-date">Due: Sep 15</div>
+          <div class="q-amt" id="q3Amt">$4,625</div>
+        </div>
+        <div class="quarter-box">
+          <div class="q-title">Q4 Payment</div>
+          <div class="q-date">Due: Jan 15</div>
+          <div class="q-amt" id="q4Amt">$4,625</div>
+        </div>
+      </div>
+
+      <table class="breakdown-table">
+        <tbody>
+          <tr>
+            <td class="k">Net Business Profit:</td>
+            <td class="v" id="valNetProfit">$80,000</td>
+          </tr>
+          <tr>
+            <td class="k">Self-Employment Tax (15.3%):</td>
+            <td class="v" id="valSeTax">$11,304</td>
+          </tr>
+          <tr>
+            <td class="k">SE Tax 50% AGI Deduction:</td>
+            <td class="v" id="valSeDeduction" style="color: #059669;">-$5,652</td>
+          </tr>
+          <tr>
+            <td class="k">Estimated Federal Income Tax:</td>
+            <td class="v" id="valFedTax">$4,520</td>
+          </tr>
+          <tr>
+            <td class="k">Estimated State Income Tax:</td>
+            <td class="v" id="valStateTax">$2,676</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.45;">
+        IRS Safe Harbor: Pay 90% of your current tax year liability or 100% of your prior year tax (110% if prior AGI was above $150k) to avoid underpayment penalties.
+      </p>
+    </section>
+  </div>
+  <!-- ADSENSE START: mid -->
+  <div class="manual-ad-box ad-mid-banner" style="width: 100%; max-width: 960px; min-height: 250px; margin: 20px auto; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 250px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="1186914926"
+         data-ad-format="rectangle,horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: mid -->
+
+  <section class="info-section">
+    <h2>How to Pay Freelance Quarterly Taxes</h2>
+    <div class="info-grid">
+      <div class="how-step">
+        <span class="step-num">1</span>
+        <h3>Track Net Income</h3>
+        <p>Subtract legitimate business expenses from 1099 revenues to determine net taxable profit.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">2</span>
+        <h3>Calculate SE Tax</h3>
+        <p>Apply the 15.3% self-employment rate to 92.35% of profit, factoring in the 50% AGI deduction.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">3</span>
+        <h3>Submit Form 1040-ES</h3>
+        <p>Send 4 equal vouchers via IRS Direct Pay, EFTPS, or state tax portals before each deadline.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><h3>Who is required to pay quarterly estimated taxes to the IRS?</h3><p>Freelancers, independent contractors, gig workers, and sole proprietors who expect to owe at least $1,000 in federal taxes after withholding must make quarterly estimated payments.</p></div>
+      <div class="faq-item"><h3>What is the self-employment tax rate and how is it calculated?</h3><p>The self-employment tax rate is 15.3%, consisting of 12.4% for Social Security (up to the annual wage cap) and 2.9% for Medicare, calculated on 92.35% of net business profit.</p></div>
+      <div class="faq-item"><h3>When are the quarterly 1040-ES tax payments due each year?</h3><p>IRS estimated tax deadlines are April 15 for Q1, June 15 for Q2, September 15 for Q3, and January 15 of the following year for Q4.</p></div>
+    </div>
+  </section>
+
+  <!-- ADSENSE START: bottom -->
+  <div class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; min-height: 280px; margin: 24px auto 16px; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 280px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="3416334507"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: bottom -->
+
+  <div id="global-ux-toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer>
+    <p>&copy; 2026 Freelance Quarterly Tax Calculator. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="/privacy.html">Privacy Policy</a> &bull;
+      <a href="/terms.html">Terms of Service</a> &bull;
+      <a href="/disclaimer.html">Disclaimer</a>
+    </p>
+  </footer>
+</div>
+
+<!-- LOGIC START -->
+<script>
+(function() {
+  const grossIncomeEl = document.getElementById('grossIncome');
+  const expensesEl = document.getElementById('expenses');
+  const filingStatusEl = document.getElementById('filingStatus');
+  const otherIncomeEl = document.getElementById('otherIncome');
+  const stateRateEl = document.getElementById('stateRate');
+
+  const valQuarterlyDueEl = document.getElementById('valQuarterlyDue');
+  const valAnnualTotalEl = document.getElementById('valAnnualTotal');
+  const valNetProfitEl = document.getElementById('valNetProfit');
+  const valSeTaxEl = document.getElementById('valSeTax');
+  const valSeDeductionEl = document.getElementById('valSeDeduction');
+  const valFedTaxEl = document.getElementById('valFedTax');
+  const valStateTaxEl = document.getElementById('valStateTax');
+
+  const q1AmtEl = document.getElementById('q1Amt');
+  const q2AmtEl = document.getElementById('q2Amt');
+  const q3AmtEl = document.getElementById('q3Amt');
+  const q4AmtEl = document.getElementById('q4Amt');
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function calcFederalTax(taxable, status) {
+    if (taxable <= 0) return 0;
+
+    // 2026 brackets
+    let brackets;
+    if (status === 'mfj') {
+      brackets = [
+        { cap: 23200, rate: 0.10 },
+        { cap: 94300, rate: 0.12 },
+        { cap: 201050, rate: 0.22 },
+        { cap: 383900, rate: 0.24 },
+        { cap: 487450, rate: 0.32 },
+        { cap: 731200, rate: 0.35 },
+        { cap: Infinity, rate: 0.37 }
+      ];
+    } else if (status === 'hoh') {
+      brackets = [
+        { cap: 16550, rate: 0.10 },
+        { cap: 63100, rate: 0.12 },
+        { cap: 100500, rate: 0.22 },
+        { cap: 191950, rate: 0.24 },
+        { cap: 243700, rate: 0.32 },
+        { cap: 609350, rate: 0.35 },
+        { cap: Infinity, rate: 0.37 }
+      ];
+    } else { // single & mfs
+      brackets = [
+        { cap: 11600, rate: 0.10 },
+        { cap: 47150, rate: 0.12 },
+        { cap: 100525, rate: 0.22 },
+        { cap: 191950, rate: 0.24 },
+        { cap: 243725, rate: 0.32 },
+        { cap: 609350, rate: 0.35 },
+        { cap: Infinity, rate: 0.37 }
+      ];
+    }
+
+    let tax = 0;
+    let prev = 0;
+    for (const b of brackets) {
+      if (taxable > prev) {
+        const chunk = Math.min(taxable, b.cap) - prev;
+        tax += chunk * b.rate;
+        prev = b.cap;
+      } else {
+        break;
+      }
+    }
+    return tax;
+  }
+
+  function calculate() {
+    const gross = Math.max(0, parseFloat(grossIncomeEl.value) || 0);
+    const expenses = Math.max(0, parseFloat(expensesEl.value) || 0);
+    const other = Math.max(0, parseFloat(otherIncomeEl.value) || 0);
+    const status = filingStatusEl.value;
+    const stateRate = parseFloat(stateRateEl.value) || 0;
+
+    const netProfit = Math.max(0, gross - expenses);
+
+    // 1. Self-employment tax
+    const seEarnings = netProfit * 0.9235;
+    const ssCap = 168600;
+    const ssTax = Math.min(seEarnings, ssCap) * 0.124;
+    const medTax = seEarnings * 0.029;
+    const totalSeTax = (netProfit > 400) ? (ssTax + medTax) : 0;
+
+    // 2. 50% SE deduction
+    const seDeduction = totalSeTax * 0.5;
+
+    // 3. Adjusted Gross Income (AGI)
+    const agi = Math.max(0, (netProfit + other) - seDeduction);
+
+    // 4. Standard Deduction
+    let stdDed = 15000;
+    if (status === 'mfj') stdDed = 30000;
+    else if (status === 'hoh') stdDed = 22500;
+
+    // 5. QBI deduction (Section 199A up to 20% of net profit)
+    const qbi = Math.max(0, Math.min(netProfit * 0.20, Math.max(0, agi - stdDed) * 0.20));
+
+    // 6. Taxable Income
+    const taxable = Math.max(0, agi - stdDed - qbi);
+
+    // 7. Federal Tax
+    const fedTax = calcFederalTax(taxable, status);
+
+    // 8. State Tax
+    const stateTax = taxable * (stateRate / 100);
+
+    // 9. Total Annual & Quarterly
+    const totalAnnual = totalSeTax + fedTax + stateTax;
+    const quarterly = totalAnnual / 4;
+
+    valQuarterlyDueEl.textContent = fmt(quarterly);
+    valAnnualTotalEl.textContent = 'Total Annual Tax: ' + fmt(totalAnnual);
+    valNetProfitEl.textContent = fmt(netProfit);
+    valSeTaxEl.textContent = fmt(totalSeTax);
+    valSeDeductionEl.textContent = '-' + fmt(seDeduction);
+    valFedTaxEl.textContent = fmt(fedTax);
+    valStateTaxEl.textContent = fmt(stateTax);
+
+    q1AmtEl.textContent = fmt(quarterly);
+    q2AmtEl.textContent = fmt(quarterly);
+    q3AmtEl.textContent = fmt(quarterly);
+    q4AmtEl.textContent = fmt(quarterly);
+  }
+
+  [grossIncomeEl, expensesEl, filingStatusEl, otherIncomeEl, stateRateEl].forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  calculate();
+})();
+</script>
+<!-- LOGIC END -->
 </body>
 </html>
